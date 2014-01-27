@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+     <script src="/jquery.min.js"></script>
+     <script type = "text/javascript">
+          function dyn() {
+                    $.get("/dyn", function(data){
+               })
+          }
+          function dyn2() {
+                    $.get("/dyn2", function(data){
+               })
+          }
+          $(document).ready(dyn);
+          setInterval(dyn2, 1000);
+     </script>
+     <title>test1</title>
+</html>

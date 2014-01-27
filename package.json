@@ -1,0 +1,30 @@
+{
+  "name": "steer-loaded",
+  "description": "Heuristic for detecting when a page is loaded in google chrome",
+  "version": "0.2.0",
+  "author": "Andreas Madsen <amwebdk@gmail.com>",
+  "main": "./steer-loaded.js",
+  "scripts": {
+    "test": "rm -rf test/cache && rm -rf test/chrome.out && tap test/browser/*"
+  },
+  "repository" : {
+    "type": "git",
+    "url": "git://github.com/AndreasMadsen/steer-loaded.git"
+  },
+  "keywords": [
+    "google chrome",
+    "steer",
+    "onload",
+    "ready"
+  ],
+  "dependencies": {
+    "hashish": "0.0.x"
+  },
+  "devDependencies": {
+    "tap": "0.4.x",
+    "steer": "0.4.x",
+    "filed": "0.1.x",
+    "director": "1.2.x"
+  },
+  "license": "MIT"
+}
