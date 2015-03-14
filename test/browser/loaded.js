@@ -83,6 +83,10 @@ function resourceObject(resources, expected) {
     obj[id].time = resources[id].time;
   }
 
+  for (var n in resources) {
+    if (!resources[n].url) obj[n] = resources[n];
+  }
+
   return obj;
 }
 
@@ -133,7 +137,7 @@ server.listen(0, function() {
               type: 'document',
               cache: false,
               mime: 'text/html',
-              method: 'GET',
+              method: undefined,
               statusCode: 200
             }, {
               url: host + '/jquery.min.js',
@@ -190,14 +194,14 @@ server.listen(0, function() {
               type: 'document',
               mime: 'text/html',
               cache: false,
-              method: 'GET',
+              method: undefined,
               statusCode: 200
             }, {
               url: host + '/missing.js',
               received: true,
               loaded: false,
               timeout: false,
-              failed: false,
+              failed: true,
               type: 'script',
               mime: 'text/plain',
               cache: false,
@@ -256,7 +260,7 @@ server.listen(0, function() {
               type: 'document',
               mime: 'text/html',
               cache: false,
-              method: 'GET',
+              method: undefined,
               statusCode: 200
             }, {
               url: host + '/timeout-image',
@@ -279,6 +283,10 @@ server.listen(0, function() {
       });
     });
 
+    // NOTE: chrome have changed behaviour and dosn't wait for the scripts.
+    // I don't think this is the W3C standard behaviour, thus the old
+    // behaviour may come back.
+    /*
     // This navigates to a page there request a very slow resource
     // (done after 5000 ms). Since this is beyond the allowed time
     // the plugin.ready callback shoudn't wait.
@@ -312,13 +320,14 @@ server.listen(0, function() {
 
           // That was a bunch of stuff, a cleanup is needed
           chrome.inspector.Page.navigate('about:blank', function(err) {
-            chrome.inspector.Page.once('loadEventFired', function () {
+            setTimeout(function () {
               t.end();
-            });
+            }, 100);
           });
         });
       });
     });
+    */
 
     test('test a simple html with no other resources', function(t) {
       var domContentEventFired = false;
@@ -343,7 +352,7 @@ server.listen(0, function() {
               type: 'document',
               mime: 'text/html',
               cache: false,
-              method: 'GET',
+              method: undefined,
               statusCode: 200
             }
           ]));
@@ -401,7 +410,7 @@ server.listen(0, function() {
               type: 'document',
               mime: 'text/html',
               cache: false,
-              method: 'GET',
+              method: undefined,
               statusCode: 200
             },
             {
