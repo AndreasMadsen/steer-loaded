@@ -14,10 +14,11 @@ Be sure to check out the requirements for `steer`.
 
 ## Documentation
 
-This module evalutes a script in the chrome context. It does much more than
-just calling `chrome.inspector.Page.evaluate` as it also catches errors and
-replicates them in chrome. It also supports objects so you don't have to
-`JSON.stringify` your output.
+Detecting when a page is loaded is quite complicated. You can't just listen
+to `onload` because some javascript may wait for this event to be fired and
+then render the page or make additional AJAX calls. This is ofcause a bad
+behaviour, never or less I see it quite often. `steer-loaded` listens to
+all requests and tries to determine when the page is actually don loading.
 
 ```javascript
 var path = require('path');
